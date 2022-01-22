@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <script type="text/javascript" src="main.js"></script>
+
+</head>
+<body>
+
+  <h1>This is a heading</h1>
+  <p>This is a paragraph.</p>
+  <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeave(event);">
+      <p>Drag one or more files to this Drop Zone ...</p>
+  </div>
+  <form
+        enctype="multipart/form-data"
+        action="https://europe-west1-starlu.cloudfunctions.net/BorderImage"
+        method="post"
+      >
+        <input type="file" name="myFile" />
+        <input type="submit" value="upload" />
+  </form>
+
+</body>
+</html>
