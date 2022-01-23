@@ -18,6 +18,8 @@ From the root of the repo:
 
 ## Deploying the website
 
+    gcloud config set project starlu
+
     cd website
 
     gsutil cp * gs://starlu_cloud_function_website
