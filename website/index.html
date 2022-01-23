@@ -14,20 +14,28 @@
       <h1 class="h3 mb-3 fw-normal" >Pragalicious</h1>
       <img class="mb-4" src="./logo.png" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Image resizer</h1>
-      <p>Upload your file here to get a resized, cropped image with red border</p>
-      <p>Image types with extension .png, .jpg and .jpeg are currently supported</p>
+      <p >Upload your file here to get a resized, cropped image with red border</p>
+      <p>Image types with extension <b>.png, .jpg and .jpeg</b> are currently supported</p>
+      <p>Image size should be <b>1200x675 or larger</b></p>
       <form
             enctype="multipart/form-data"
             action="https://europe-west1-starlu.cloudfunctions.net/BorderImage"
             method="post"
           >
           <div class="form-floating">
-            <input id="filename-input" type="file" name="myFile" onchange="undisableBtn()"/>
+            <input id="file-input" type="file" name="myFile" onchange="undisableBtn()"/>
+          </div>
+          <div class="form-group mt-3">
+            <label>Game</label>
+            <input id="filename-input" type="text" name="myFileName"/>
+            <p><small>(Will be used to generate the filename)</small></p>
           </div>
           
           <button id="upload-btn" class="mt-3 w-100 btn btn-lg btn-primary" type="submit" disabled=true>upload</button>
+          <button class="mt-3 w-75 btn btn-sm btn-primary" type="reset" onclick="reset()">reset</button>
+
           
-          <p class="mt-5 mb-3 text-muted">Remember: Every Starfield image upload results in a dead 🐶 or 🐱</p>
+          <p class="mt-3 mb-3 text-muted">Remember: Every Starfield image upload results in a dead 🐶 or 🐱</p>
           <p class="mt-5 mb-3 text-muted">Made by <a href="https://www.starlu.be">starlu™</a></p>
       </form>
     </main>

@@ -19,6 +19,8 @@ func BorderImage(w http.ResponseWriter, r *http.Request) {
 	// FormFile returns the first file for the given key `myFile`
 	// it also returns the FileHeader so we can get the Filename,
 	// the Header and the size of the file
+	outputFilename := r.FormValue("myFileName")
+
 	file, handler, err := r.FormFile("myFile")
 	if err != nil {
 		fmt.Println("Error Retrieving the File")
@@ -32,7 +34,7 @@ func BorderImage(w http.ResponseWriter, r *http.Request) {
 
 	// Create a temporary file within our temp-images directory that follows
 	// a particular naming pattern
-	tempFile, err := ioutil.TempFile("/tmp", fmt.Sprintf("pragafied-*.%s", filepath.Ext(handler.Filename)))
+	tempFile, err := ioutil.TempFile("/tmp", fmt.Sprintf("pragafied-*%s", filepath.Ext(handler.Filename)))
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -64,7 +66,11 @@ func BorderImage(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "Failure exporting %s!", err.Error())
 		}
 		w.Header().Set("Content-Type", "application/octet-stream")
-		w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filepath.Base(conv)))
+		if outputFilename == "" {
+			w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", filepath.Base(conv)))
+		} else {
+			w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s-pragafied%s", outputFilename, filepath.Ext(conv)))
+		}
 		w.Write(dat)
 	}
 
